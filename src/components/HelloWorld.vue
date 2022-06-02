@@ -1,7 +1,6 @@
 <template>
-  <div class="hello"  v-for="(item, index) in items" :key="index">
+  <div  v-for="(item, index) in items" :key="index" class="center">
       <Card/>
-      {{item}}
   </div>
 </template>
 
@@ -39,5 +38,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.center{
+  text-align: center
 }
 </style>
