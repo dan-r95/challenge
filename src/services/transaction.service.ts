@@ -2,14 +2,14 @@ import { transactions } from '../data/transactions'
 import { cards } from '../data/cards'
 
 
-export class TransactionService {
+export default {
 
-    public getTransactions(): any {
-        return transactions;
-    }
+    getTransactions(): any {
+        return Promise.resolve(transactions);
+    },
 
-    public getCards(): any {
-        return cards
+    getCards(): any {
+        return Promise.resolve(cards);
     }
 
 }

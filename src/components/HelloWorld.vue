@@ -1,26 +1,30 @@
 <template>
-  <div  v-for="(item, index) in items" :key="index" class="center">
-      <Card/>
+  <div v-for="(item, index) in cards" :key="index" class="center">
+    <Card />
   </div>
 </template>
 
 <script>
-import Card from './Card.vue'
-
+import Card from "./Card.vue";
+import TransactionService from "../services/transaction.service.ts";
 export default {
-   components: {
-    Card
+  components: {
+    Card,
   },
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
-  data(){
+  mounted() {
+    TransactionService.getCards().then((cards) => (this.cards = cards));
+  },
+  data() {
     return {
-        items: [1,2]
-    }
-  }
-}
+      items: [1, 2],
+      cards: [],
+    };
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -39,7 +43,7 @@ li {
 a {
   color: #42b983;
 }
-.center{
-  text-align: center
+.center {
+  text-align: center;
 }
 </style>
