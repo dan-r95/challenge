@@ -1,5 +1,5 @@
-import { transactions } from '../data/transactions'
-import { cards } from '../data/cards'
+import { transactions } from './data/transactions'
+import { cards } from './data/cards'
 
 
 export default {

@@ -13,7 +13,7 @@
 <script>
 
 export default {
-  name: "Add",
+  name: "Card",
   methods: {},
 
   mounted() {
