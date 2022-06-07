@@ -1,24 +1,30 @@
 <template>
-  <el-card class="box-card">
+  <el-card shadow="always" class="box-card">
     <template #header>
       <div class="card-header">
-        <span>Card name</span>
-        <el-button class="button" text>Operation button</el-button>
+        <span>{{ value.id }}</span>
+        <span> {{ value.description }} </span>
+        <el-button type="success" icon="Check" circle />
       </div>
     </template>
-    <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
   </el-card>
 </template>
 
-<script>
+<script lang="ts">
+import type { PropType } from "vue";
+import { defineComponent } from "vue";
+import { Check } from "@element-plus/icons-vue";
 
-export default {
+import type { Card } from "types/card";
+
+export default defineComponent({
   name: "Card",
   methods: {},
-
-  mounted() {
+  props: {
+    value: { type: Object as PropType<Card>, required: true },
   },
-};
+  mounted() {},
+});
 </script>
 
 
@@ -38,6 +44,7 @@ export default {
 }
 
 .box-card {
-  width: 480px;
+  width: 300px;
+  border: 3px solid;
 }
 </style>
