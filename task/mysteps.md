@@ -9,3 +9,6 @@
 * npm init vue@3 with typescript support
 * for testing i decided to use vitest since jest seems to be semi - supported and also
 not very obvious how to set it up
+* Next, I added a github action to automatically deploy the app to github pages
+* Next I added the prop passing to the Card component and a click action. The table showing the transaction 
+was added in the same commit. Missing now was the selection of transactions via the slider.
