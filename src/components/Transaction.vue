@@ -18,7 +18,6 @@ export default {
 };
 </script>
 
-
 <style>
 .card-header {
   display: flex;

@@ -1,6 +1,8 @@
 <template>
   <div class="about">
-    <h4>Hello, i am a coding challenge product. Visit my github profile :joy:</h4>
+    <h4>
+      Hello, i am a coding challenge product. Visit my github profile :joy:
+    </h4>
   </div>
 </template>
 

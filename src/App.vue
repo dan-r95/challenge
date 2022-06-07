@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {RouterLink, RouterView} from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import { RouterLink, RouterView } from "vue-router";
+import HomeView from "@/views/HomeView.vue";
 </script>
 
 <template>
@@ -10,18 +10,20 @@ import HomeView from '@/views/HomeView.vue'
         <nav>
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/about">About</RouterLink>
-            <el-link type="primary" href="https://github.com/dan-r95/challenge">Github</el-link>
+          <el-link type="primary" href="https://github.com/dan-r95/challenge"
+            >Github</el-link
+          >
         </nav>
       </el-header>
       <el-main>
-        <RouterView/>
+        <RouterView />
       </el-main>
-      </el-container>
+    </el-container>
   </div>
 </template>
 
 <style>
-@import '@/assets/base.css';
+@import "@/assets/base.css";
 
 #app {
   max-width: 1280px;

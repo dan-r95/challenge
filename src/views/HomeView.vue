@@ -52,7 +52,7 @@ import { ref } from "vue";
 import { defineComponent } from "vue";
 
 import Card from "../components/Card.vue";
-import type { CardType } from "../types";
+import type { CardType, TransactionType } from "../types";
 import TransactionService from "../services/transaction.service";
 
 export default defineComponent({
@@ -72,7 +72,7 @@ export default defineComponent({
       value: [4, 8],
       currentItem: null,
       transactions: [],
-       originalTransactions: [],
+      originalTransactions: [],
       loading: true,
       loadingTransactions: false,
       inputMin: 0,
@@ -90,14 +90,13 @@ export default defineComponent({
       this.loadingTransactions = false;
     },
     inputMin(val: number) {
-      console.log(this.transactions)
+      console.log(this.transactions);
       let transactions = this.originalTransactions.filter(
-        (item) => {
-         console.log(item)
-         return item.amount >= val && item.amount <= this.inputMax
+        (item: TransactionType) => {
+          return item.amount >= val && item.amount <= this.inputMax;
         }
       );
-      this.transactions = transactions
+      this.transactions = transactions;
       console.log("filtered");
     },
   },
@@ -106,12 +105,18 @@ export default defineComponent({
       let min = 0;
       let max = 0;
       if (this.transactions != null) {
-        min = this.transactions.reduce((min, transaction) => {
-          return transaction.amount < min ? transaction.amount : min;
-        }, this.transactions[0].amount);
-        max = this.transactions.reduce((max, transaction) => {
-          return transaction.amount > max ? transaction.amount : max;
-        }, this.transactions[0].amount);
+        min = this.transactions.reduce(
+          (min: number, transaction: TransactionType) => {
+            return transaction.amount < min ? transaction.amount : min;
+          },
+          this.transactions[0]["amount"]
+        );
+        max = this.transactions.reduce(
+          (max: number, transaction: TransactionType) => {
+            return transaction.amount > max ? transaction.amount : max;
+          },
+          this.transactions[0]["amount"]
+        );
         this.inputMin = min;
         this.inputMax = max;
         this.valueRange = [min, max];

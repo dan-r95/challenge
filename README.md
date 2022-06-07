@@ -1,6 +1,5 @@
 # fancy-cards 💳
 
-
 See the steps I did in `steps.md`.
 
 ## Project Setup
