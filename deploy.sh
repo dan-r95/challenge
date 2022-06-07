@@ -16,6 +16,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:dan-r95/fancy-cards.git master:gh-pages
+git push -f git@github.com:dan-r95/challenge.git master:gh-pages
 
 cd -
