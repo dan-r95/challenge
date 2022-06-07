@@ -10,9 +10,10 @@ import HomeView from '@/views/HomeView.vue'
         <nav>
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/about">About</RouterLink>
+            <el-link type="primary" href="https://github.com/dan-r95/challenge">Github</el-link>
         </nav>
       </el-header>
-      <el-main>Main
+      <el-main>
         <RouterView/>
       </el-main>
       </el-container>
@@ -33,11 +34,6 @@ import HomeView from '@/views/HomeView.vue'
 header {
   line-height: 1.5;
   max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
 }
 
 a,

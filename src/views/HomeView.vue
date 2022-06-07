@@ -1,73 +1,130 @@
 <template>
-  <div v-for="(item, index) in cards" :key="index" class="center">
-    <CardComponent
-      :value="item"
-      @click="currentItem = item"
-      :class="currentItem == item ? 'selected' : ''"
-    />
-  </div>
-  <!--      class="w-50 m-2"-->
-  <div class="m-5" v-if="currentItem">
-    <el-input
-      v-model="input2"
-      size="small"
-      placeholder="min"
-      :prefix-icon="Search"
-    />
-    <el-input
-      v-model="input2"
-      size="small"
-      placeholder="max"
-      :prefix-icon="Search"
-    />
-    <el-slider v-model="value" range show-stops :max="10" />
-    <el-table v-loading="loading" :data="transactions" style="width: 100%">
-      <el-table-column prop="id" label="Id" width="180" />
-      <el-table-column prop="amount" label="Amount" width="180" />
-      <el-table-column prop="description" label="Description" />
-    </el-table>
+  <div v-loading="loading">
+    <div v-for="(item, index) in cards" :key="index" class="center">
+      <Card
+        :value="item"
+        @click="currentItem = item"
+        :class="currentItem == item ? 'selected' : ''"
+      />
+    </div>
+
+    <div class="m-5" v-if="currentItem">
+      <el-input
+        v-model="inputMin"
+        size="small"
+        type="number"
+        placeholder="min"
+        :prefix-icon="Search"
+      />
+      <el-input
+        v-model="inputMax"
+        size="small"
+        type="number"
+        placeholder="max"
+        :prefix-icon="Search"
+      />
+      <el-slider
+        v-model="valueRange"
+        range
+        show-stops
+        :max="inputMax"
+        @change="sliderChange"
+      />
+      <el-table
+        v-loading="loadingTransactions"
+        :data="transactions"
+        style="width: 100%"
+      >
+        <el-table-column prop="id" label="Id" width="180" />
+        <el-table-column prop="amount" label="Amount" width="180" />
+        <el-table-column prop="description" label="Description" />
+      </el-table>
+    </div>
   </div>
 </template>
 
+<script setup lang="ts">
+import { Search } from "@element-plus/icons-vue";
+</script>
+
 <script lang="ts">
 import { ref } from "vue";
-import { Search } from "@element-plus/icons-vue";
-const value = ref([4, 8]);
+import { defineComponent } from "vue";
 
-import CardComponent from "../components/Card.vue";
-import type { Card } from "types/card";
+import Card from "../components/Card.vue";
+import type { CardType } from "../types";
 import TransactionService from "../services/transaction.service";
-export default {
+
+export default defineComponent({
   components: {
-    CardComponent,
+    Card,
   },
   name: "HomeView",
-  props: {
-    msg: String,
-  },
-  mounted() {
-    TransactionService.getCards().then((cards: Card) => (this.cards = cards));
+  props: {},
+  async created() {
+    const cards = await TransactionService.getCards();
+    this.cards = cards;
+    this.loading = false;
   },
   data() {
     return {
-      items: [1, 2],
       cards: [],
       value: [4, 8],
       currentItem: null,
       transactions: [],
+       originalTransactions: [],
       loading: true,
+      loadingTransactions: false,
+      inputMin: 0,
+      inputMax: 0,
+      valueRange: [0, 0],
     };
   },
   watch: {
-    currentItem(val: Card) {
-      this.loading = true;
-      TransactionService.getTransaction(val.id).then((transactions: any) => {
-        this.transactions = transactions;
-        this.loading = false;
-      });
+    async currentItem(val: CardType) {
+      this.loadingTransactions = true;
+      const transactions = await TransactionService.getTransaction(val.id);
+      this.originalTransactions = transactions;
+      this.transactions = transactions;
+      this.setTransactionRange();
+      this.loadingTransactions = false;
+    },
+    inputMin(val: number) {
+      console.log(this.transactions)
+      let transactions = this.originalTransactions.filter(
+        (item) => {
+         console.log(item)
+         return item.amount >= val && item.amount <= this.inputMax
+        }
+      );
+      this.transactions = transactions
+      console.log("filtered");
     },
   },
-};
+  methods: {
+    setTransactionRange() {
+      let min = 0;
+      let max = 0;
+      if (this.transactions != null) {
+        min = this.transactions.reduce((min, transaction) => {
+          return transaction.amount < min ? transaction.amount : min;
+        }, this.transactions[0].amount);
+        max = this.transactions.reduce((max, transaction) => {
+          return transaction.amount > max ? transaction.amount : max;
+        }, this.transactions[0].amount);
+        this.inputMin = min;
+        this.inputMax = max;
+        this.valueRange = [min, max];
+      }
+    },
+    sliderChange(newValue: any) {
+      if (newValue.length == 2) {
+        this.inputMin = newValue[0];
+        this.inputMax = newValue[1];
+      }
+    },
+  },
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

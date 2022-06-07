@@ -8,7 +8,9 @@
     },
     "types": ["vitest/globals"]
   },
-
+  "exclude": [
+    "node_modules"
+  ],
   "references": [
     {
       "path": "./tsconfig.vite-config.json"

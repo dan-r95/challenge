@@ -1,4 +1,4 @@
-# fancy-cards
+# fancy-cards 💳
 
 
 See the steps I did in `steps.md`.

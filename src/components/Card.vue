@@ -15,13 +15,13 @@ import type { PropType } from "vue";
 import { defineComponent } from "vue";
 import { Check } from "@element-plus/icons-vue";
 
-import type { Card } from "types/card";
+import type { CardType } from "../types";
 
 export default defineComponent({
   name: "Card",
   methods: {},
   props: {
-    value: { type: Object as PropType<Card>, required: true },
+    value: { type: Object as PropType<CardType>, required: true },
   },
   mounted() {},
 });
