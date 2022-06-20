@@ -33,7 +33,7 @@
       <el-table
         v-loading="loadingTransactions"
         :data="transactions"
-        style="width: 100%"
+        class="table"
       >
         <el-table-column prop="id" label="Id" width="180" />
         <el-table-column prop="amount" label="Amount" width="180" />
@@ -90,20 +90,20 @@ export default defineComponent({
       this.loadingTransactions = false;
     },
     inputMin(val: number) {
-      console.log(this.transactions);
       let transactions = this.originalTransactions.filter(
         (item: TransactionType) => {
           return item.amount >= val && item.amount <= this.inputMax;
         }
       );
       this.transactions = transactions;
-      console.log("filtered");
     },
   },
   methods: {
     setTransactionRange() {
       let min = 0;
-      let max = 0;
+      let max = 1;
+      //this.inputMin = min;
+      //this.inputMax = max;
       if (this.transactions != null) {
         min = this.transactions.reduce(
           (min: number, transaction: TransactionType) => {
@@ -152,7 +152,14 @@ a {
   text-align: center;
 }
 .selected {
-  border-color: green;
+  border-color: var(--selected-color) !important;
+  background-color: var(--selected-color);
   border-radius: 5px;
+}
+
+.table {
+  width: 100%;
+  border-color: var(--selected-color);
+  background-color: var(--selected-color);
 }
 </style>

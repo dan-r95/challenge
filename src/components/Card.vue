@@ -3,8 +3,15 @@
     <template #header>
       <div class="card-header">
         <span>{{ value.id }}</span>
-        <span> {{ value.description }} </span>
-        <el-button type="success" icon="Check" circle />
+      </div>
+      <div class="bottom">
+        <span class="italic"> {{ value.description }} </span>
+        <el-button
+          class="has-margin"
+          type="success"
+          icon="DArrowRight"
+          circle
+        />
       </div>
     </template>
   </el-card>
@@ -13,7 +20,7 @@
 <script lang="ts">
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
-import { Check } from "@element-plus/icons-vue";
+import { Check, DArrowRight } from "@element-plus/icons-vue";
 
 import type { CardType } from "../types";
 
@@ -40,6 +47,14 @@ export default defineComponent({
 
 .item {
   margin-bottom: 18px;
+}
+
+.has-margin {
+  margin-left: 20px;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .box-card {
