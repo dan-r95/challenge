@@ -9,7 +9,7 @@
         <Text
           ref="text"
           text="Hello :)"
-          font-src="/src/assets/helv_regular.typeface.json"
+          font-src="@/assets/helv_regular.typeface.json"
           align="center"
           :size="30"
           :height="5"
