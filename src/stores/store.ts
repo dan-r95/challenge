@@ -11,25 +11,6 @@ export const useThemeStore = defineStore("theme", {
     nextId: 0,
   }),
   getters: {
-    finishedTodos(state) {
-      // autocompletion! ✨
-      return state.todos.filter((todo) => todo.isFinished);
-    },
-    unfinishedTodos(state) {
-      return state.todos.filter((todo) => !todo.isFinished);
-    },
-    /**
-     * @returns {{ text: string, id: number, isFinished: boolean }[]}
-     */
-    filteredTodos(state) {
-      if (this.filter === "finished") {
-        // call other getters with autocompletion ✨
-        return this.finishedTodos;
-      } else if (this.filter === "unfinished") {
-        return this.unfinishedTodos;
-      }
-      return this.todos;
-    },
     currentMode(state): string {
       return state.mode;
     },

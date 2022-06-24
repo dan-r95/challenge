@@ -37,8 +37,8 @@ import {Box, Camera, LambertMaterial, PointLight, Renderer, Scene, PhongMaterial
 import { defineComponent, onMounted, ref } from 'vue';
 export default  defineComponent({
   setup() {
-    const renderer = ref(null);
-    const text = ref(null);
+    const renderer = ref();
+    const text = ref();
     onMounted(() => {
       renderer?.value?.onBeforeRender(() => {
         if( text.value.mesh ) {
