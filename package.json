@@ -1,6 +1,7 @@
 {
   "name": "fancy-cards",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -43,6 +44,7 @@
     "start-server-and-test": "^1.14.0",
     "typescript": "~4.7.2",
     "vite": "^2.9.9",
+    "vite-plugin-md": "^0.17.4",
     "vitest": "^0.13.1",
     "vue-tsc": "^0.35.2"
   },
